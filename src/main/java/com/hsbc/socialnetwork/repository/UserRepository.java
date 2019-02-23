@@ -1,10 +1,10 @@
 package com.hsbc.socialnetwork.repository;
 
-import com.hsbc.socialnetwork.domain.UserEntity;
+import com.hsbc.socialnetwork.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
 }

@@ -4,15 +4,15 @@ package com.hsbc.socialnetwork.domain;
 import javax.persistence.*;
 
 @Entity(name = "Message")
-public class MessageEntity extends BaseEntity {
+public class Message extends Base {
 
     private String message;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private User user;
 
-    public MessageEntity() {
+    public Message() {
         super();
     }
 
@@ -25,11 +25,11 @@ public class MessageEntity extends BaseEntity {
     }
 
 
-    public UserEntity getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }

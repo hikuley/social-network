@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import java.util.Objects;
 
 @Entity(name = "User")
-public class UserEntity extends BaseEntity {
+public class User extends Base {
 
     private String firstName;
     private String lastName;
@@ -13,7 +13,7 @@ public class UserEntity extends BaseEntity {
     private String password;
 
 
-    public UserEntity() {
+    public User() {
         super();
     }
 
@@ -62,7 +62,7 @@ public class UserEntity extends BaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserEntity user = (UserEntity) o;
+        User user = (User) o;
         return Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
                 Objects.equals(nickName, user.nickName) &&

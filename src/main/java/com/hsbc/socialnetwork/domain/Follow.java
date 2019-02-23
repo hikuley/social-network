@@ -3,34 +3,34 @@ package com.hsbc.socialnetwork.domain;
 import javax.persistence.*;
 
 @Entity(name = "Follow")
-public class FollowEntity extends BaseEntity {
+public class Follow extends Base {
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "who_id")
-    private UserEntity who;
+    private User who;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "to_id")
-    private UserEntity to;
+    private User to;
 
 
-    public FollowEntity() {
+    public Follow() {
         super();
     }
 
-    public UserEntity getWho() {
+    public User getWho() {
         return who;
     }
 
-    public void setWho(UserEntity who) {
+    public void setWho(User who) {
         this.who = who;
     }
 
-    public UserEntity getTo() {
+    public User getTo() {
         return to;
     }
 
-    public void setTo(UserEntity to) {
+    public void setTo(User to) {
         this.to = to;
     }
 

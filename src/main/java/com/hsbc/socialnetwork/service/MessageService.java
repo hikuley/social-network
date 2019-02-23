@@ -1,7 +1,7 @@
 package com.hsbc.socialnetwork.service;
 
-import com.hsbc.socialnetwork.domain.MessageEntity;
-import com.hsbc.socialnetwork.domain.UserEntity;
+import com.hsbc.socialnetwork.domain.Message;
+import com.hsbc.socialnetwork.domain.User;
 import com.hsbc.socialnetwork.model.PostMessageRequest;
 import com.hsbc.socialnetwork.model.PostMessageResponse;
 import com.hsbc.socialnetwork.repository.MessageRepository;
@@ -38,14 +38,14 @@ public class MessageService extends BaseService {
 
 
         Long userId = postMessageRequest.getUserId();
-        Optional<UserEntity> user = userRepository.findById(userId);
-        UserEntity userEntity = user.get();
+        Optional<User> user = userRepository.findById(userId);
+        User userEntity = user.get();
 
-        MessageEntity messageEntity = new MessageEntity();
+        Message messageEntity = new Message();
         messageEntity.setUser(userEntity);
         messageEntity.setMessage(postMessageRequest.getMessage());
 
-        MessageEntity saved = messageRepository.save(messageEntity);
+        Message saved = messageRepository.save(messageEntity);
 
         log.info("Finished the postMessage method. {}:", saved);
 

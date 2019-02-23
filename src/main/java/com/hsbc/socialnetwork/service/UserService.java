@@ -1,8 +1,8 @@
 package com.hsbc.socialnetwork.service;
 
-import com.hsbc.socialnetwork.domain.FollowEntity;
-import com.hsbc.socialnetwork.domain.MessageEntity;
-import com.hsbc.socialnetwork.domain.UserEntity;
+import com.hsbc.socialnetwork.domain.Follow;
+import com.hsbc.socialnetwork.domain.Message;
+import com.hsbc.socialnetwork.domain.User;
 import com.hsbc.socialnetwork.model.*;
 import com.hsbc.socialnetwork.repository.FollowRepository;
 import com.hsbc.socialnetwork.repository.MessageRepository;
@@ -42,9 +42,9 @@ public class UserService extends BaseService {
 
         log.info("User create method started.");
 
-        UserEntity userEntity = modelMapper.map(userCreateRequest, UserEntity.class);
+        User userEntity = modelMapper.map(userCreateRequest, User.class);
 
-        UserEntity saved = userRepository.save(userEntity);
+        User saved = userRepository.save(userEntity);
 
         log.info("User create method finished.");
 
@@ -55,7 +55,7 @@ public class UserService extends BaseService {
 
         log.info(" UserService getWall method started.");
 
-        List<MessageEntity> messageList = messageRepository.findByUserIdOrderByIdDesc(userId);
+        List<Message> messageList = messageRepository.findByUserIdOrderByIdDesc(userId);
 
         log.info("UserService getWall method finished.");
 
@@ -70,23 +70,23 @@ public class UserService extends BaseService {
 
         Long to = followRequest.getToId();
 
-        UserEntity whoUser = userRepository.findById(who).get();
+        User whoUser = userRepository.findById(who).get();
 
-        UserEntity toUser = userRepository.findById(to).get();
+        User toUser = userRepository.findById(to).get();
 
-        FollowEntity followEntity = new FollowEntity();
+        Follow followEntity = new Follow();
 
         followEntity.setWho(whoUser);
 
         followEntity.setTo(toUser);
 
-        FollowEntity isExistLine = followRepository.findByWhoIdAndToIdIs(who, to);
+        Follow isExistLine = followRepository.findByWhoIdAndToIdIs(who, to);
 
         if (isExistLine != null)
             throw new Exception("You are following " + toUser.getFirstName() + " already.");
 
 
-        FollowEntity saved = followRepository.save(followEntity);
+        Follow saved = followRepository.save(followEntity);
 
         log.info("UserService getWall method finished.");
 
@@ -100,15 +100,15 @@ public class UserService extends BaseService {
 
         List<Long> followingList = new ArrayList<>();
 
-        List<FollowEntity> list = followRepository.findByWhoId(userId);
+        List<Follow> list = followRepository.findByWhoId(userId);
 
-        for (FollowEntity follow : list) {
+        for (Follow follow : list) {
             followingList.add(follow.getTo().getId());
         }
 
         log.info("getting following list []", followingList);
 
-        List<MessageEntity> timeLine = messageRepository.findByUserIdInOrderByIdDesc(followingList);
+        List<Message> timeLine = messageRepository.findByUserIdInOrderByIdDesc(followingList);
 
         log.info("getting message list according to []", followingList);
 
