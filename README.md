@@ -1,6 +1,6 @@
 
   
-## Social Network
+## Spring Rest Services Microservice with Swagger
   
 This project is a challange and it built based on spring-boot and java EE specifications. 
 
